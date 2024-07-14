@@ -91,6 +91,7 @@ COLORS = {
     1024: "#B0E0E6",
     2048: "#FFE4E1",
 }
+```
 Contributing
 Contributions are welcome! If you have suggestions or improvements, feel free to create an issue or submit a pull request.
 
