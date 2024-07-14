@@ -92,7 +92,7 @@ COLORS = {
     2048: "#FFE4E1",
 }
 ```
-Contributing
+### Contributing
 Contributions are welcome! If you have suggestions or improvements, feel free to create an issue or submit a pull request.
 
 Fork the repository.
@@ -101,8 +101,9 @@ Make your changes.
 Commit your changes (git commit -m 'Add some feature').
 Push to the branch (git push origin feature-branch).
 Open a pull request.
-License
+
+### License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Inspiration
+### Inspiration
 This project is inspired by Al Sweigart's implementation of the 2048 game from his book "The Big Book of Small Python Projects".
