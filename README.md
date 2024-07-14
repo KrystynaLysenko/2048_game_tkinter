@@ -32,7 +32,7 @@ This project is a basic implementation of the 2048 game using the Tkinter librar
 1. **Clone the repository:**
 
     ```sh
-    git clone https://github.com/yourusername/2048-tkinter.git
+    git clone https://github.com/KrystynaLysenko/2048_game_tkinter.git
     cd 2048-tkinter
     ```
 
