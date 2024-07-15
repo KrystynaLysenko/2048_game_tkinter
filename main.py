@@ -47,7 +47,7 @@ class App(tk.Tk):
         
     def create_new_board(self):
         self.squares = [[],[],[],[]]
-        #Squares
+        #Creates empty squares
         for n in range(4):
             for y in range(4):
                 text = 0
@@ -56,17 +56,17 @@ class App(tk.Tk):
                 self.squares[n].append(square_label)
                 square_label.grid(column=n, row=y, columnspan=1, rowspan=1, padx=5, pady=5)
 
-        self.update_board()
+        self.generate_rand_squares()
 
         
                 
-    def update_board(self):
+    def generate_rand_squares(self):
         generated_squares = 0
         
-        while generated_squares < 2:
+        while generated_squares < 1:
             
             randx, randy = (random.randint(0, 3), random.randint(0, 3))
-            print(randx, randy)
+            # print(randx, randy)
             
             if not self.check_full():
                 if self.squares[randx][randy].cget('text') == 0:
@@ -76,14 +76,7 @@ class App(tk.Tk):
             else:
                 break
             
-                
-    # def combine_colums(self, direction):
-    #     column_list = []
-        
-    #     if direction == "Left":
-    #         previous_colomn = []
-    #         for n in range(3):
-    #             self.squares[0]
+
     
     def check_full(self):
         item_list = []
@@ -139,21 +132,19 @@ class App(tk.Tk):
                 if column[n].cget('text') == column[n + 1].cget('text'):
                     new_value = int(column[n].cget('text') * 2)
                     column[n].configure(text=new_value, bg=COLORS[new_value])
-                    
                     column[n + 1].configure(text=0, bg=COLORS[0])
                 elif column[n].cget('text') == '0':
                     new_value = int(column[n + 1].cget('text'))
                     column[n].configure(text=new_value, bg=COLORS[new_value])
-                
+                    column[n + 1].configure(text=0, bg=COLORS[0])
+                else:
+                    pass
 
-            
-            
-        
     
     def on_up_arrow(self, event):
         self.make_move('Up')
-        self.update_board()
-        print("Up arrow key pressed!")
+        self.generate_rand_squares()
+        # print("Up arrow key pressed!")
         
         # for line in self.squares:
         #     print("\n")
@@ -163,20 +154,20 @@ class App(tk.Tk):
         
     def on_down_arrow(self, event):
         self.make_move('Down')
-        self.update_board()
-        print("Down arrow key pressed!")
+        self.generate_rand_squares()
+        # print("Down arrow key pressed!")
     
     
     def on_right_arrow(self, event):
         self.make_move('Right')
-        self.update_board()
-        print("Right arrow key pressed!")
+        self.generate_rand_squares()
+        # print("Right arrow key pressed!")
     
     
     def on_left_arrow(self, event):
         self.make_move('Left')
-        self.update_board()
-        print("Left arrow key pressed!")
+        self.generate_rand_squares()
+        # print("Left arrow key pressed!")
             
         
             
