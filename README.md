@@ -63,15 +63,9 @@ This project is a basic implementation of the 2048 game using the Tkinter librar
 ### App Class Methods:
 
 - `__init__`: Initializes the Tkinter application, creates the game board, and binds keys.
-<<<<<<< HEAD
-- `create_new_board`: Sets up a new game board with a 4x4 grid of tiles.
-- `generate_rand_squares`: Generates new tiles on the board.
-- `check_full`: Checks if the board is full.
-=======
 - `draw_new_board`: Sets up a new game board with a 4x4 grid of tiles.
 - `update_board`: Generates new tiles on the board.
 - `is_full`: Checks if the board is full.
->>>>>>> f16c84c (Update README.md)
 - `make_move`: Handles the logic for moving and combining tiles based on direction.
 - `on_up_arrow`: Moves tiles up and updates the board.
 - `on_down_arrow`: Moves tiles down and updates the board.
