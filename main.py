@@ -1,6 +1,6 @@
 # Example file showing a basic pygame "game loop"
 import tkinter as tk
-
+from tkinter import messagebox
 import random
 
 
@@ -34,7 +34,7 @@ class App(tk.Tk):
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
         
-        self.create_new_board()
+        self.draw_new_board()
         self.board_full = True
         
         self.root.bind("<Up>", self.on_up_arrow)
@@ -45,9 +45,9 @@ class App(tk.Tk):
         self.root.mainloop()
         
         
-    def create_new_board(self):
+    def draw_new_board(self):
         self.squares = [[],[],[],[]]
-        #Creates empty squares
+        #Draws empty board
         for n in range(4):
             for y in range(4):
                 text = 0
@@ -55,10 +55,13 @@ class App(tk.Tk):
                 square_label.configure(bg=COLORS[square_label.cget('text')])
                 self.squares[n].append(square_label)
                 square_label.grid(column=n, row=y, columnspan=1, rowspan=1, padx=5, pady=5)
-
+                
         self.generate_rand_squares()
-
         
+        
+    def show_game_over_popup(self):
+        messagebox.showinfo("Game Over", "Game is over. You lost!")
+ 
                 
     def generate_rand_squares(self):
         generated_squares = 0
@@ -66,23 +69,23 @@ class App(tk.Tk):
         while generated_squares < 1:
             
             randx, randy = (random.randint(0, 3), random.randint(0, 3))
-            # print(randx, randy)
             
-            if not self.check_full():
+            if not self.is_full():
                 if self.squares[randx][randy].cget('text') == 0:
                     self.squares[randx][randy].configure(text=2, bg=COLORS[2])
                     generated_squares += 1
       
-            else:
+            elif self.is_full():
+                self.show_game_over_popup()
+                # self.draw_new_board()
                 break
-            
-
     
-    def check_full(self):
+    def is_full(self):
         item_list = []
         for row_num in range(len(self.squares)):
             for item in self.squares[row_num]:
                 item_list.append(int(item.cget('text')))
+                
         if 0 in item_list:
             return False
         else:
@@ -128,51 +131,43 @@ class App(tk.Tk):
             
             column = [first_square, second_square, third_square, forth_square]
             
+            combined_squares = []
+            
+            for n in range(4):
+                combined_squares.append(column[n])
+            
             for n in range(len(column) - 1):
+                
                 if column[n].cget('text') == column[n + 1].cget('text'):
                     new_value = int(column[n].cget('text') * 2)
-                    column[n].configure(text=new_value, bg=COLORS[new_value])
                     column[n + 1].configure(text=0, bg=COLORS[0])
-                elif column[n].cget('text') == '0':
-                    new_value = int(column[n + 1].cget('text'))
                     column[n].configure(text=new_value, bg=COLORS[new_value])
-                    column[n + 1].configure(text=0, bg=COLORS[0])
-                else:
-                    pass
+                    
+                    for aboveIndex in range(n + 1, 3):
+                        new_value = combined_squares[aboveIndex + 1].cget('text')
+                        combined_squares[aboveIndex].configure(text=new_value, bg=COLORS[new_value])
+                    combined_squares[3].configure(text=0, bg=COLORS[0])                         
 
     
     def on_up_arrow(self, event):
         self.make_move('Up')
         self.generate_rand_squares()
-        # print("Up arrow key pressed!")
-        
-        # for line in self.squares:
-        #     print("\n")
-        #     for square in line:
-        #         print(square.cget('text'))
         
         
     def on_down_arrow(self, event):
         self.make_move('Down')
         self.generate_rand_squares()
-        # print("Down arrow key pressed!")
     
     
     def on_right_arrow(self, event):
         self.make_move('Right')
         self.generate_rand_squares()
-        # print("Right arrow key pressed!")
     
     
     def on_left_arrow(self, event):
         self.make_move('Left')
         self.generate_rand_squares()
-        # print("Left arrow key pressed!")
-            
-        
-            
-        
-                    
+                   
       
 
 if __name__ == "__main__":
